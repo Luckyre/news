@@ -1,4 +1,6 @@
 import App from './App'
+import api from './common/api'
+
 
 // #ifndef VUE3
 import Vue from 'vue'
@@ -19,3 +21,6 @@ export function createApp() {
   }
 }
 // #endif
+
+
+Vue.prototype.$api = api

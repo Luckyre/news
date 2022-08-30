@@ -1,5 +1,6 @@
 import $http from '../http.js'
 
+// api
 export const get_label = (data) => {
 	return $http({
 		url: 'get_label',

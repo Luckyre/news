@@ -1,3 +1,4 @@
+import { rejects } from 'assert';
 import store from '../store/index.js';
 export default function $http(options) {
 	const {
@@ -27,3 +28,4 @@ export default function $http(options) {
 		})
 	})
 }
+
