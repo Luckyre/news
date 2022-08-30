@@ -9,7 +9,8 @@
 			<view class="navbar-content" :class="{search:isSearch}" :style="{height:navBarHeight+'px',width:windowWidth+'px'}"
 			 @click.stop="open">
 				<view v-if="isSearch" class="navbar-content__search-icons" @click="back">
-					<uni-icons type="back" size="22" color="#fff"></uni-icons>
+					<!-- <uni-icons type="back" size="22" color="#fff"></uni-icons> -->
+					<uni-icons type="search" size="30"></uni-icons>
 				</view>
 				<view v-if="!isSearch" class="navbar-search">
 					<!-- 非搜索页显示 -->
