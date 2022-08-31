@@ -5,17 +5,18 @@
 		<tab :list="tabList" :tabIndex="tabIndex"  @tab="tab"></tab>
 		<view class="home-list">
 			<list :tab="tabList" :activeIndex="activeIndex" @change="change"></list>
-		<!-- 	<list-scroll>
-				<view v-for="item in 100">{{item}}</view>
-			</list-scroll> -->
 		</view>
 	</view>
 </template>
 
 <script>
+	import list from '@/components/list/list.vue'
 	import {mapState} from 'vuex'
 	// easyCom components/组件名/组件名.vue 局部引入
 	export default {
+		components: {
+			list
+		},
 		data() {
 			return {
 				title: 'Hello',
@@ -33,6 +34,10 @@
 			// }
 		},
 		onLoad() {
+			this.tabList = []
+			this.tabIndex = 0
+			this.activeIndex = 0
+			this.getLabel()
 			// uni.$on('labelChange',(res)=>{
 			// 	this.tabList = []
 			// 	this.tabIndex = 0

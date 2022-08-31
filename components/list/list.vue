@@ -35,6 +35,7 @@
 			};
 		},
 		watch: {
+			//监听tab值变化时，进行操作
 			tab(newVal) {
 				if (newVal.length === 0) return
 				this.listCatchData = {}
@@ -45,10 +46,10 @@
 		// onLoad 在页面 ，created 组件
 		created() {
 			// TODO tab 还没有赋值
-			// this.getList(0)
-			uni.$on('update_article',(e)=>{
+			this.getList(0)
+			uni.$on('update_article', (e) => {
 				console.log(e);
-				if(e === 'follow'){
+				if (e === 'follow') {
 					this.listCatchData = {}
 					this.load = {}
 					this.getList(this.activeIndex)
@@ -79,7 +80,7 @@
 						loading: 'loading'
 					}
 				}
-				console.log('当前的页数',this.load[current].page);
+				console.log('当前的页数', this.load[current].page);
 				this.$api.get_list({
 					name: this.tab[current].name,
 					page: this.load[current].page,
