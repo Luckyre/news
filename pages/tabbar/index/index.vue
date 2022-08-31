@@ -5,6 +5,9 @@
 		<tab :list="tabList" :tabIndex="tabIndex"  @tab="tab"></tab>
 		<view class="home-list">
 			<list :tab="tabList" :activeIndex="activeIndex" @change="change"></list>
+		<!-- 	<list-scroll>
+				<view v-for="item in 100">{{item}}</view>
+			</list-scroll> -->
 		</view>
 	</view>
 </template>
@@ -77,7 +80,7 @@
 		flex: 1;
 		overflow: hidden;
 		.home-list {
-			flex:1;
+			flex:1; 
 			box-sizing: border-box;
 		}
 	}
