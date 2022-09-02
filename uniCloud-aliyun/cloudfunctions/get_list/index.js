@@ -17,25 +17,24 @@ exports.main = async (event, context) => {
 	}
 	
 	const userinfo = await db.collection('user').doc(user_id).get()
-	console.log('userinfo',userinfo)
-	// const article_likes_ids = userinfo.data[0].article_likes_ids
+	const article_likes_ids = userinfo.data[0].article_likes_ids // 获取收藏字段
 	
-	// // 聚合 ： 更精细化的去处理数据 求和 、分组、指定那些字段
+	// 聚合 ： 更精细化的去处理数据 求和 、分组、指定那些字段
 
-	// const list = await db.collection('article')
-	// 	.aggregate()
-	// 	// 追加字段
-	// 	.addFields({
-	// 		is_like:$.in(['$_id',article_likes_ids])
-	// 	})
-	// 	.match(matchObj)
-	// 	.project({
-	// 		content: 0
-	// 	})
-	// 	// 要跳过多少数据
-	// 	.skip(pageSize * (page - 1))
-	// 	.limit(pageSize)
-	// 	.end()
+	const list = await db.collection('article')
+		.aggregate()
+		// 追加字段
+		.addFields({
+			is_like:$.in(['$_id',article_likes_ids]) //表示是否包含当前article_likes_ids表字段中的id字段
+		})
+		.match(matchObj)
+		.project({
+			content: 0
+		})
+		// 要跳过多少数据
+		.skip(pageSize * (page - 1))
+		.limit(pageSize)
+		.end()
 	// 接受分类，通过分类去筛选数据
 	// const list = await db.collection('article')
 	// .field({
@@ -47,6 +46,6 @@ exports.main = async (event, context) => {
 	return {
 		code: 200,
 		msg: '数据请求成功',
-		data: userinfo
+		data: list.data
 	}
 };
