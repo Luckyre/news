@@ -29,13 +29,20 @@ exports.main = async (event, context) => {
 			content: 0
 		})
 		// 要跳过多少数据
-		.skip(pageSize * (page - 1))
-		.limit(pageSize)
+		.skip(pageSize * (page - 1)) //通过page确认查询的数据量PageSize
+		.limit(pageSize) // 限制输出到下一阶段的输出数量
 		.get()
 
 	//event为客户端上传的参数
 	console.log('list : ', list)
 
+	// 接受分类，通过分类去筛选数据
+	// const list = await db.collection('article')
+	// .field({
+	// 	// true 值返回这个字段，false 表示不返回
+	// 	content:false
+	// })
+	// .get()
 	//返回数据给客户端
 	return {
 		code: 200,

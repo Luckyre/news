@@ -94,7 +94,7 @@
 						let oldLoad = {}
 						oldLoad.loading = 'noMore'
 						oldLoad.page = this.load[current].page
-						this.$set(this.load, current, oldLoad)
+						this.$set(this.load, current, oldLoad) 
 						// 强制渲染页面
 						this.$forceUpdate()
 						return
