@@ -1,41 +1,41 @@
 'use strict';
-
 // 获取数据库的引用
 const db = uniCloud.database()
 const $ = db.command.aggregate
-const db = uniCloud.database()
 exports.main = async (event, context) => {
-
 	const {
 		user_id,
 		name,
 		page = 1,
-		pageSize = 10,
+		pageSize = 10
 	} = event
 	let matchObj = {}
 	if (name !== '全部') {
-			matchObj = {
-				classify: name //classify字段匹配对应的tab切换
-			}
+		matchObj = {
+			classify: name
 		}
-
+	}
+	
 	const userinfo = await db.collection('user').doc(user_id).get()
-	const article_likes_ids = userinfo.data[0].article_likes_ids
-	//聚合: 更精细化的去处理数据、求和、分组、指定哪些字段
-	const list = await db.collection('article').aggregate() // 追加字段
-		.addFields({
-			is_like: $.in(['$_id', article_likes_ids])
-		}).match(matchObj).project({
-			content: 0
-		})
-		// 要跳过多少数据
-		.skip(pageSize * (page - 1)) //通过page确认查询的数据量PageSize
-		.limit(pageSize) // 限制输出到下一阶段的输出数量
-		.get()
+	console.log('userinfo',userinfo)
+	// const article_likes_ids = userinfo.data[0].article_likes_ids
+	
+	// // 聚合 ： 更精细化的去处理数据 求和 、分组、指定那些字段
 
-	//event为客户端上传的参数
-	console.log('list : ', list)
-
+	// const list = await db.collection('article')
+	// 	.aggregate()
+	// 	// 追加字段
+	// 	.addFields({
+	// 		is_like:$.in(['$_id',article_likes_ids])
+	// 	})
+	// 	.match(matchObj)
+	// 	.project({
+	// 		content: 0
+	// 	})
+	// 	// 要跳过多少数据
+	// 	.skip(pageSize * (page - 1))
+	// 	.limit(pageSize)
+	// 	.end()
 	// 接受分类，通过分类去筛选数据
 	// const list = await db.collection('article')
 	// .field({
@@ -47,7 +47,6 @@ exports.main = async (event, context) => {
 	return {
 		code: 200,
 		msg: '数据请求成功',
-		data: list.data
+		data: userinfo
 	}
-
 };
